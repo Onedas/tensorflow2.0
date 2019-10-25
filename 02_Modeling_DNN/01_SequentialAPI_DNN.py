@@ -16,8 +16,7 @@ model = tf.keras.models.Sequential([
 	tf.keras.layers.Dense(10, activation = 'softmax')
 ])
 
-## another method
-'''
+''' # Another method
 model2 = tf.keras.models.Sequential()
 model2.add(tf.keras.layers.Flatten(input_shape=(28,28)))
 model2.add(tf.keras.layers.Dense(64, activation = 'relu'))

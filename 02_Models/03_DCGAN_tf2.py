@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 '''
-tensorflow version : 2.0.0
 
+tensorflow version : 2.0.0
 @author: Onedas
+
 '''
 
 import matplotlib.pyplot as plt
@@ -90,7 +91,6 @@ cross_entropy = tf.keras.losses.BinaryCrossentropy(from_logits=True)
 def discriminator_loss (real_output, fake_output):
 	real_loss = cross_entropy(tf.ones_like(real_output), real_output)
 	fake_loss = cross_entropy(tf.zeros_like(fake_output), fake_output)
-
 	total_loss = real_loss + fake_loss
 	return total_loss
 
@@ -122,7 +122,7 @@ seed = tf.random.normal([num_examples_to_generate, noise_dim])
 @tf.function
 def train_step(images):
 	noise = tf.random.normal([BATCH_SIZE, noise_dim])
-
+    
 	with tf.GradientTape() as gen_tape, tf.GradientTape() as disc_tape:
 		generated_image = generator(noise, training=True)
 

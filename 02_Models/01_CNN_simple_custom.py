@@ -54,7 +54,19 @@ def train(dataset, epochs):
         for images, labels in dataset:
             train_step(images,labels)
         
-        print ('Time for epoch {} is {} sec'.format(epoch + 1, time.time()-start))
+        print ('Time for epoch {} is {:.3%} sec'.format(epoch + 1, time.time()-start))
+
+def test_(test_dataset):
+    test_accuracy = tf.keras.metrics.Accuracy()
+
+    for (x, y) in test_dataset:
+      logits = model(x)
+      prediction = tf.argmax(logits, axis=1, output_type=tf.int32)
+      test_accuracy(prediction, y)
+    
+    print("테스트 세트 정확도: {:.3%}".format(test_accuracy.result()))
+
+
 
 #%%
 if __name__ == "__main__":
@@ -81,3 +93,18 @@ if __name__ == "__main__":
     
     #%% train
     train(train_ds, 5)
+    
+    #%% Test
+    test_(test_ds)
+    
+    #%% Predict
+    for i in range(1000):
+        img, label = x_test[i], y_test[i]
+        predict = tf.argmax(tf.squeeze(model(img[tf.newaxis,...])))
+        import matplotlib.pyplot as plt
+        if predict.numpy() != label:
+            plt.imshow(tf.squeeze(img))
+            plt.xticks([])
+            plt.yticks([])
+            plt.xlabel('predict : {}, answer : {}'.format(predict.numpy(),label))
+            plt.show()

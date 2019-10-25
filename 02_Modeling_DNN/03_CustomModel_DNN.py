@@ -10,6 +10,7 @@ from tensorflow.keras.layers import Dense, Flatten
 from tensorflow.keras import Model
 
 import time
+
 class MyModel(Model):
     def __init__(self):
         super(MyModel, self).__init__()
@@ -26,6 +27,7 @@ class MyModel(Model):
         return x
 
 model = MyModel()
+
 loss_object = tf.keras.losses.SparseCategoricalCrossentropy()
 optimizer = tf.keras.optimizers.Adam()
 
@@ -49,6 +51,7 @@ def train(dataset, epochs):
         print ('Time for epoch {} is {} sec'.format(epoch + 1, time.time()-start))
 
 
+
 if __name__ == "__main__":
     print('tensorflow version :',tf.__version__)
        
@@ -61,7 +64,7 @@ if __name__ == "__main__":
     # Add a channels dimension
     x_train = x_train[..., tf.newaxis]
     x_test = x_test[..., tf.newaxis]
-    
+
     train_ds = tf.data.Dataset.from_tensor_slices((x_train, y_train)).shuffle(10000).batch(32)
     test_ds = tf.data.Dataset.from_tensor_slices((x_test, y_test)).batch(32)
     
