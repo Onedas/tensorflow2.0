@@ -45,7 +45,7 @@ def train_step(images, labels):
         
     gradients = tape.gradient(loss, model.trainable_variables)
     optimizer.apply_gradients(zip (gradients, model.trainable_variables))
-    
+
 def train(dataset, epochs):
     
     for epoch in range(epochs):
@@ -54,7 +54,7 @@ def train(dataset, epochs):
         for images, labels in dataset:
             train_step(images,labels)
         
-        print ('Time for epoch {} is {:.3%} sec'.format(epoch + 1, time.time()-start))
+        print ('Time for epoch {} is {:.3} sec'.format(epoch + 1, time.time()-start))
 
 def test_(test_dataset):
     test_accuracy = tf.keras.metrics.Accuracy()
